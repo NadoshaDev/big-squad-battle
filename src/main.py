@@ -1,8 +1,16 @@
-# Big Squad Battle
-# Initial game core
+import random
 
 player_squads = [10, 8, 7, 9, 6]
-computer_squads = [11, 13, 10, 1, 5]
+computer_squads = []
+
+remaining = 40
+
+for _ in range(4):
+    random_number = random.randint(0, remaining)
+    computer_squads.append(random_number)
+    remaining -= random_number
+
+computer_squads.append(remaining)
 
 player_score = 0
 computer_score = 0
