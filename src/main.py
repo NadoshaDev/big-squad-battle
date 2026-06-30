@@ -2,16 +2,36 @@ import random
 
 player_squads = []
 player_remaining = 40
+
+
 for i in range(4):
     number_squad = i + 1
     print(f"Формируется {number_squad} отряд")
-    quantity_warrior = int(input("Введите количество воинов в этом отряде"))
+    
+    while True:
+
+        user_input = input(f"Введите количество воинов (от 0 до {player_remaining}):")
+        try:    
+            quantity_warrior = int(user_input)
+
+            if quantity_warrior < 0:
+                print("Ошибка! Количество воинов не может быть отрицательным.")
+                continue
+
+            if quantity_warrior > player_remaining:
+                print(f"Ошибка! Можно распределить не более {player_remaining} воинов.")
+                continue
+            
+            break
+
+        except ValueError:
+            print("Ошибка ввода! Введите целое число.")                       
     player_squads.append(quantity_warrior)
     player_remaining -= quantity_warrior
-    print(f"В {number_squad} отряд добавлено {quantity_warrior} воинов")
-    print("Осталось распределить воинов:", player_remaining)
+    print(f"В {number_squad} отряд добавлено {quantity_warrior} воинов.")
+        
 
-print(f"В 5 отряд автоматически добавлено {player_remaining} воинов")
+print(f"В 5 отряд автоматически добавлено {player_remaining} воинов.")
 player_squads.append(player_remaining)
 
 computer_squads = []
@@ -35,6 +55,7 @@ for i in range(len(player_squads)):
 if player_score > computer_score:
     print("Игрок победил со счётом", player_score)
 elif player_score < computer_score:
-    print("Увы, в следующий раз повезёт, компьютер победил со счётом", computer_score)
+   print("Компьютер победил со счётом", computer_score)
+   print("Удачи в следующей игре!")
 else:
     print("Боевая ничья")
